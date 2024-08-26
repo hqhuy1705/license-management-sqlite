@@ -55,4 +55,20 @@ const validateLicenseKey = async (req, res) => {
   }
 };
 
-module.exports = { generateLicenseKey, validateLicenseKey };
+// Fetch all license keys
+const getAllLicenses = (req, res) => {
+  const query = 'SELECT * FROM licenses';
+  
+  db.all(query, (err, rows) => {
+    if (err) {
+      return res.status(500).json({ message: 'Database error', error: err.message });
+    }
+    return res.status(200).json(rows);
+  });
+};
+
+module.exports = { 
+  generateLicenseKey, 
+  validateLicenseKey, 
+  getAllLicenses 
+};

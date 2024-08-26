@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateLicenseKey, validateLicenseKey } = require('../controllers/licenseController');
+const { generateLicenseKey, validateLicenseKey, getAllLicenses } = require('../controllers/licenseController');
 const router = express.Router();
 
 /**
@@ -59,5 +59,36 @@ router.post('/generate', generateLicenseKey);
  *         description: Server error
  */
 router.post('/validate', validateLicenseKey);
+
+/**
+ * @swagger
+ * /api/license/all:
+ *   get:
+ *     summary: Get all license keys
+ *     description: Retrieve all license keys stored in the database.
+ *     responses:
+ *       200:
+ *         description: List of license keys
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   user:
+ *                     type: string
+ *                   license_key:
+ *                     type: string
+ *                   is_active:
+ *                     type: integer
+ *                   expires_at:
+ *                     type: string
+ *       500:
+ *         description: Server error
+ */
+router.get('/all', getAllLicenses);
 
 module.exports = router;
