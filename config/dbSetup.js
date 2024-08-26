@@ -7,8 +7,10 @@ const setupDatabase = () => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user TEXT NOT NULL,
         license_key TEXT NOT NULL,
+        device_id TEXT,
+        is_used INTEGER DEFAULT 0,
         is_active INTEGER DEFAULT 1,
-        expires_at TEXT NOT NULL
+        expires_at
       )
     `);
   });
